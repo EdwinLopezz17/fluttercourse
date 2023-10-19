@@ -27,20 +27,27 @@ class _MyHomePageState extends State<MyHomePageState> {
       appBar: AppBar(
         title: Text("Files, Columns, Bottons"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children:<Widget> [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: Text("Hello 01", textAlign: TextAlign.center,),
+      body: Center(
+        child: ElevatedButton(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.access_time),
+              SizedBox(
+                width: 5.0,
+              ),
+              Text("Time now")
+            ],
           ),
-          Text("Hello 02"),
-          Text("Hello 03, Hello 04")
-        ],
+          onPressed:(){
+            var date = DateTime.now();
+            print(date);
+          },
+        ),
       )
     );
   }
 }
+
 
 
