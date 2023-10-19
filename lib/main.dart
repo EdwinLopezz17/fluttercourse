@@ -5,49 +5,40 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "My App",
-      home:Inicio(),
+      home:MyHomePageState(),
     );
   }
 }
 
-class Inicio extends StatefulWidget {
+class MyHomePageState extends StatefulWidget {
 
   @override
-  State<Inicio> createState() => _InicioState();
+  State<MyHomePageState> createState() => _MyHomePageState();
 }
 
-class _InicioState extends State<Inicio> {
+class _MyHomePageState extends State<MyHomePageState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My App"),
+        title: Text("Files, Columns, Bottons"),
       ),
-      body: ListView(
-        children: [
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children:<Widget> [
           Container(
-            padding: EdgeInsets.all(10.0),
-            child: Image.network("https://images.pexels.com/photos/1591375/pexels-photo-1591375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+            width: MediaQuery.of(context).size.width,
+            child: Text("Hello 01", textAlign: TextAlign.center,),
           ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: Image.network("https://images.pexels.com/photos/788200/pexels-photo-788200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: Image.network("https://images.pexels.com/photos/1591375/pexels-photo-1591375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: Image.network("https://images.pexels.com/photos/788200/pexels-photo-788200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
-          ),
+          Text("Hello 02"),
+          Text("Hello 03, Hello 04")
         ],
-      ),
+      )
     );
   }
 }
