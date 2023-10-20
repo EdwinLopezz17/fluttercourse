@@ -1,4 +1,5 @@
 
+import 'package:courseflutter/pages/ContainerAnimado.dart';
 import 'package:courseflutter/pages/HomePage.dart';
 import 'package:courseflutter/pages/UserPage.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,10 @@ class MyHomePageState extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePageState> {
 
-  int _actualPage = 0;
+  int _actualPage = 1;
   List<Widget>_pages=[
     HomePage(),
+    Animated(),
     UserPage(),
   ];
 
@@ -54,6 +56,10 @@ class _MyHomePageState extends State<MyHomePageState> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.animation),
+            label: "Animated",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.supervised_user_circle),
