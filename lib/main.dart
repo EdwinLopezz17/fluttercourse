@@ -1,8 +1,5 @@
-
-import 'package:courseflutter/pages/ContainerAnimado.dart';
-import 'package:courseflutter/pages/HomePage.dart';
-import 'package:courseflutter/pages/UserPage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,61 +11,65 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "My App",
-      home:MyHomePageState(),
+      home:InitView(),
     );
   }
 }
 
-class MyHomePageState extends StatefulWidget {
 
+class InitView extends StatefulWidget {
   @override
-  State<MyHomePageState> createState() => _MyHomePageState();
+  State<InitView> createState() => _InitViewState();
 }
 
-class _MyHomePageState extends State<MyHomePageState> {
-
-  int _actualPage = 1;
-  List<Widget>_pages=[
-    HomePage(),
-    Animated(),
-    UserPage(),
-  ];
+class _InitViewState extends State<InitView> {
+  int value= 0;
 
   @override
-  void initState() {
+  void initState(){
+    super.initState();
+    _loadPreferences();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Botton Navigation Bar"),
-        ),
-        body: _pages[_actualPage],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _actualPage,
-        onTap: (index){
-          setState(() {
-            _actualPage = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.animation),
-            label: "Animated",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.supervised_user_circle),
-            label: "Users",
-          ),
-        ],
+      appBar: AppBar(
+        title: Text('Preferences'),
       ),
-
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  child: Text(value.toString(),
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),)
+              ),
+              ElevatedButton(
+                  onPressed: _changeValue,
+                  child: Text("Plus Value"),
+              )
+            ],
+          )
+      ),
     );
   }
-}
 
+  _changeValue() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    preferences.setInt("value", value);
+
+    setState(() {
+      value++;
+    });
+  }
+  _loadPreferences()async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      value = preferences.getInt("value") ?? 0;
+    });
+  }
+}
